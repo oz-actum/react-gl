@@ -48,7 +48,7 @@ class WithoutConstructor extends Component<Props, State> {
 
   /**
    *   With arrow function expression "this" always represents the object
-   *   that defined the arrow function, so "this" points to "ClassComponentWithoutConstructor"
+   *   that defined the arrow function, so "this" points to "WithoutConstructor"
    */
   handleClick = () => {
     this.setState({ counter: this.state.counter + 1 });
