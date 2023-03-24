@@ -71,4 +71,4 @@ class WithoutConstructor extends Component<Props, State> {
 
 ## Lifecycle
 
-![react-lifecycle.png](..%2F..%2F..%2F..%2Fpublic%2Freact-lifecycle.png)
+![react-lifecycle.png](..%2F..%2F..%2Fpublic%2Freact-lifecycle.png)
