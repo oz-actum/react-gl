@@ -7,6 +7,9 @@ import { StrictModeComponent } from "./Components/BuiltIn/StrictMode/StrictModeC
 import { FragmentComponent } from "./Components/BuiltIn/Fragment/FragmentComponent";
 import { SuspenseComponent } from "./Components/BuiltIn/Suspense/SuspenseComponent";
 import { ProfilerComponent } from "./Components/BuiltIn/Profiler/ProfilerComponent";
+import { HigherOrderComponent } from "./Components/HOC/HigherOrderComponent";
+import { UseState } from "./Hooks/UseState/UseState";
+import { UseEffect } from "./Hooks/UseEffect/UseEffect";
 
 const ToC: FC = () => {
   return (
@@ -39,6 +42,20 @@ const ToC: FC = () => {
                 <Link to="components/built-in/profiler">Profiler</Link>
               </li>
             </ul>
+          </li>
+          <li>
+            <Link to="components/hoc">Higher Order Component</Link>
+          </li>
+        </ul>
+      </li>
+      <li>
+        Hooks
+        <ul>
+          <li>
+            <Link to="hooks/use-state">useState</Link>
+          </li>
+          <li>
+            <Link to="hooks/use-effect">useEffect</Link>
           </li>
         </ul>
       </li>
@@ -76,6 +93,9 @@ function App() {
           path="components/built-in/profiler"
           element={<ProfilerComponent />}
         />
+        <Route path="components/hoc" element={<HigherOrderComponent />} />
+        <Route path="hooks/use-state" element={<UseState />} />
+        <Route path="hooks/use-effect" element={<UseEffect />} />
       </Routes>
     </div>
   );

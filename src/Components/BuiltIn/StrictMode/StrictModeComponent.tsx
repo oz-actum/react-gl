@@ -9,7 +9,9 @@ interface Prop {
 export const StrictModeComponent: FC = () => {
   return (
     <>
-      <MyComponent isStrict={false} data={mathScore} />
+      <React.StrictMode>
+        <MyComponent isStrict={false} data={mathScore} />
+      </React.StrictMode>
     </>
   );
 };

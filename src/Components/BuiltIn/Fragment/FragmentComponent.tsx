@@ -1,8 +1,10 @@
-import React, { FC } from "react";
+import React, { FC, Fragment } from "react";
 import { mathScore } from "../../../mockData/mathScore";
 
 export const FragmentComponent: FC = () => {
-  const renderNames = mathScore.map((item) => <>{item[0]}</>);
+  const renderNames = mathScore.map((item, index) => (
+    <Fragment key={index}>{item[0]}</Fragment>
+  ));
 
-  return <div>{renderNames}</div>;
+  return <>{renderNames}</>;
 };

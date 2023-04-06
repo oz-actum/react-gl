@@ -1,5 +1,5 @@
-import React, { FC, useState } from "react";
-// import { suspensify } from "suspensify"; // Converts any promise to suspended promise, https://www.npmjs.com/package/suspensify
+import React, { FC, useState, Suspense } from "react";
+import { suspensify } from "suspensify"; // Converts any promise to suspended promise, https://www.npmjs.com/package/suspensify
 
 export const SuspenseComponent: FC = () => {
   const [renderContent, setRenderContent] = useState(false);
@@ -16,6 +16,12 @@ export const SuspenseComponent: FC = () => {
         Load
       </button>
       {renderContent && (content ? <div>{content}</div> : <Loader />)}
+
+      {renderContent && (
+        <Suspense fallback={<Loader />}>
+          <DelayedContent delay={2000} />
+        </Suspense>
+      )}
     </>
   );
 };
@@ -28,3 +34,10 @@ const getContentWithDelay = (delay: number) =>
       resolve("Content");
     }, delay);
   });
+
+const suspendedContent = suspensify(getContentWithDelay);
+
+const DelayedContent: FC<{ delay: number }> = ({ delay }) => {
+  const content = suspendedContent(delay);
+  return <div>{content}</div>;
+};
