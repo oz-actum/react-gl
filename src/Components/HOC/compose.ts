@@ -1,3 +1,7 @@
+/*
+* compose(...hocs)(component)
+* */
+
 export const compose = (...fns: any[]) =>
   fns.reduceRight(
     (prevFn, nextFn) =>
