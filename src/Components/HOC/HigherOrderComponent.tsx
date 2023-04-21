@@ -1,6 +1,7 @@
 import React, { FC } from "react";
-// import { withInteraction } from "./withInteraction";
-// import { withLoading } from "./withLoading";
+import { withInteraction } from "./withInteraction";
+import { withLoading } from "./withLoading";
+import { compose } from "./compose";
 
 /**
  * TASK 1: Enhance the SimpleForm component with "withLoading" and "withInteraction" HOCs functions.
@@ -11,7 +12,7 @@ import React, { FC } from "react";
  */
 
 export const HigherOrderComponent: FC = () => {
-  return <SimpleForm />;
+  return <EnhancedSimpleForm />;
 };
 
 const SimpleForm: FC = (props: any) => {
@@ -40,3 +41,8 @@ const SimpleForm: FC = (props: any) => {
     </form>
   );
 };
+
+const EnhancedSimpleForm = compose(
+  withLoading,
+  withInteraction
+)(SimpleForm)

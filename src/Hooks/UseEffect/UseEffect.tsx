@@ -20,12 +20,14 @@ const Counter = () => {
 
   useEffect(() => {
     const onTick = () => {
-      setCount((prev) => prev + 1);
+      setCount(count + 1);
       console.log("tick");
     };
 
-    setInterval(onTick, 1000);
-  }, []);
+    // setInterval(onTick, 1000);
+    const intervalId = setInterval(onTick, 1000);
+    return () => clearInterval(intervalId);
+  }, [count]);
 
   return <h1>{count}</h1>;
 };

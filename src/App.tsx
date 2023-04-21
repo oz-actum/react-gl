@@ -10,6 +10,9 @@ import { ProfilerComponent } from "./Components/BuiltIn/Profiler/ProfilerCompone
 import { HigherOrderComponent } from "./Components/HOC/HigherOrderComponent";
 import { UseState } from "./Hooks/UseState/UseState";
 import { UseEffect } from "./Hooks/UseEffect/UseEffect";
+import { UseRef } from "./Hooks/useRef/UseRef";
+import {UseMemo} from "./Hooks/UseMemo/UseMemo";
+import {UseCallback} from "./Hooks/UseCallback/UseCallback";
 
 const ToC: FC = () => {
   return (
@@ -57,6 +60,15 @@ const ToC: FC = () => {
           <li>
             <Link to="hooks/use-effect">useEffect</Link>
           </li>
+          <li>
+            <Link to="hooks/use-ref">useRef</Link>
+          </li>
+          <li>
+            <Link to="hooks/use-memo">useMemo</Link>
+          </li>
+          <li>
+            <Link to="hooks/use-callback">useCallback</Link>
+          </li>
         </ul>
       </li>
     </ul>
@@ -96,6 +108,9 @@ function App() {
         <Route path="components/hoc" element={<HigherOrderComponent />} />
         <Route path="hooks/use-state" element={<UseState />} />
         <Route path="hooks/use-effect" element={<UseEffect />} />
+        <Route path="hooks/use-ref" element={<UseRef />} />
+        <Route path="hooks/use-memo" element={<UseMemo />} />
+        <Route path="hooks/use-callback" element={<UseCallback />} />
       </Routes>
     </div>
   );

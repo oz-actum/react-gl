@@ -7,10 +7,16 @@ import React, { FC, useState } from "react";
  */
 
 export const UseState: FC = () => {
-  return <Form />;
+  const [version, setVersion] = useState(0);
+
+  const handleReset = () => {
+    setVersion(version + 1);
+  };
+
+  return <Form key={version} handleReset={handleReset} />;
 };
 
-const Form: FC = () => {
+const Form: FC<any> = ({ handleReset }) => {
   const [counter, setCounter] = useState(0);
 
   const addOne = () => {
@@ -18,8 +24,8 @@ const Form: FC = () => {
   };
 
   const addTwo = () => {
-    setCounter(counter + 1);
-    setCounter(counter + 1);
+    setCounter((prev) => prev + 1); // 0 => 0 + 1 (1)
+    setCounter((prev) => prev + 1); // 1 => 1 + 1 (2)
   };
 
   return (
@@ -31,11 +37,7 @@ const Form: FC = () => {
       <button type="button" className="btn btn-primary" onClick={addTwo}>
         Add 2
       </button>
-      <button
-        type="reset"
-        className="btn btn-primary"
-        // onClick={handleReset}
-      >
+      <button type="reset" className="btn btn-primary" onClick={handleReset}>
         Reset
       </button>
     </>
