@@ -1,4 +1,4 @@
-import React, { FC, useState } from "react";
+import React, { FC, useRef, useState } from "react";
 
 /**
  * TASK 1: Make isUpdate value persistent during re-renderings, so it keeps the desired value.
@@ -12,18 +12,21 @@ export const UseRef: FC = () => {
     setRerender((prev) => prev + 1);
   };
 
-  let isUpdated = false;
+  const isUpdated = useRef(false);
+
+  const inputRef = useRef<HTMLInputElement>(null)
 
   const handleUpdate = () => {
-    isUpdated = !isUpdated;
+    isUpdated.current = !isUpdated.current;
     console.log("isUpdated", isUpdated);
+    inputRef.current && inputRef.current.focus()
   };
 
-  console.log("isUpdated", isUpdated);
+  console.log("isUpdated", isUpdated.current);
 
   return (
     <>
-      <code>isUpdated: {JSON.stringify(isUpdated)}</code>
+      <code>isUpdated: {JSON.stringify(isUpdated.current)}</code>
       <br />
       <button className="btn btn-primary" onClick={handleUpdate}>
         Update
@@ -35,7 +38,7 @@ export const UseRef: FC = () => {
         <label className="form-label" htmlFor="refInput">
           Text input
         </label>
-        <input className="input-group" type="text" id="refInput" />
+        <input ref={inputRef} className="input-group" type="text" id="refInput" />
       </form>
     </>
   );

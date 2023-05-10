@@ -1,4 +1,4 @@
-import React, { FC, useMemo, useState } from "react";
+import React, { FC, useCallback, useState } from "react";
 
 const isPrime = (number: number): boolean => {
   for (let i = 2, s = Math.sqrt(number); i <= s; i++) {
@@ -22,10 +22,14 @@ export const UseCallback: FC = () => {
     setCount(current);
   };
 
-  const handlePrime = useMemo(() => {
-    return () => {
-      prime && console.log(`${count} is prime`);
-    };
+  // const handlePrime = useMemo(() => {
+  //   return () => {
+  //     prime && console.log(`${count} is prime`);
+  //   };
+  // }, [prime]);
+
+  const handlePrime = useCallback(() => {
+    prime && console.log(`${count} is prime`);
   }, [prime]);
 
   return (

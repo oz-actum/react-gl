@@ -1,4 +1,4 @@
-import React, { FC, useRef, useState } from "react";
+import React, { FC, useMemo, useRef, useState } from "react";
 import { createTodos, filterTodos } from "./utils";
 
 export interface Todos {
@@ -19,9 +19,12 @@ const TodoList: FC<{ todos: Todos[]; theme: string; tab: string }> = ({
   theme,
   tab,
 }) => {
-  // console.time("filter array");
-  const visibleTodos: Todos[] = filterTodos(todos, tab); // TODO TASK1
-  // console.timeEnd("filter array");
+  console.time("filter array");
+  const visibleTodos: Todos[] = useMemo(
+    () => filterTodos(todos, tab),
+    [todos, tab]
+  );
+  console.timeEnd("filter array");
 
   return (
     <ul className="list-group">

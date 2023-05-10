@@ -11,8 +11,11 @@ import { HigherOrderComponent } from "./Components/HOC/HigherOrderComponent";
 import { UseState } from "./Hooks/UseState/UseState";
 import { UseEffect } from "./Hooks/UseEffect/UseEffect";
 import { UseRef } from "./Hooks/useRef/UseRef";
-import {UseMemo} from "./Hooks/UseMemo/UseMemo";
-import {UseCallback} from "./Hooks/UseCallback/UseCallback";
+import { UseMemo } from "./Hooks/UseMemo/UseMemo";
+import { UseCallback } from "./Hooks/UseCallback/UseCallback";
+import { UseContext } from "./Hooks/UseContext/UseContext";
+import { UseLayoutEffect } from "./Hooks/UseLayoutEffect/UseLayoutEffect";
+import { UseTransition } from "./Hooks/UseTransition/UseTransition";
 
 const ToC: FC = () => {
   return (
@@ -69,6 +72,15 @@ const ToC: FC = () => {
           <li>
             <Link to="hooks/use-callback">useCallback</Link>
           </li>
+          <li>
+            <Link to="hooks/use-context">useContext</Link>
+          </li>
+          <li>
+            <Link to="hooks/use-layout-effect">useLayoutEffect</Link>
+          </li>
+          <li>
+            <Link to="hooks/use-transition">useTransition</Link>
+          </li>
         </ul>
       </li>
     </ul>
@@ -111,6 +123,9 @@ function App() {
         <Route path="hooks/use-ref" element={<UseRef />} />
         <Route path="hooks/use-memo" element={<UseMemo />} />
         <Route path="hooks/use-callback" element={<UseCallback />} />
+        <Route path="hooks/use-context" element={<UseContext />} />
+        <Route path="hooks/use-layout-effect" element={<UseLayoutEffect />} />
+        <Route path="hooks/use-transition" element={<UseTransition />} />
       </Routes>
     </div>
   );
