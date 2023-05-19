@@ -16,6 +16,10 @@ import { UseCallback } from "./Hooks/UseCallback/UseCallback";
 import { UseContext } from "./Hooks/UseContext/UseContext";
 import { UseLayoutEffect } from "./Hooks/UseLayoutEffect/UseLayoutEffect";
 import { UseTransition } from "./Hooks/UseTransition/UseTransition";
+import { UseId } from "./Hooks/useId/UseId";
+import { UseReducer } from "./Hooks/useReducer/UseReducer";
+import { UseDebugValue } from "./Hooks/useDebugValue/UseDebugValue";
+import { UseDeferredValue } from "./Hooks/useDeferredValue/UseDeferredValue";
 
 const ToC: FC = () => {
   return (
@@ -81,6 +85,18 @@ const ToC: FC = () => {
           <li>
             <Link to="hooks/use-transition">useTransition</Link>
           </li>
+          <li>
+            <Link to="hooks/use-id">useId</Link>
+          </li>
+          <li>
+            <Link to="hooks/use-reducer">useReducer</Link>
+          </li>
+          <li>
+            <Link to="hooks/use-debug-value">useDebugValue</Link>
+          </li>
+          <li>
+            <Link to="hooks/use-deferred-value">useDeferredValue</Link>
+          </li>
         </ul>
       </li>
     </ul>
@@ -126,6 +142,10 @@ function App() {
         <Route path="hooks/use-context" element={<UseContext />} />
         <Route path="hooks/use-layout-effect" element={<UseLayoutEffect />} />
         <Route path="hooks/use-transition" element={<UseTransition />} />
+        <Route path="hooks/use-id" element={<UseId />} />
+        <Route path="hooks/use-reducer" element={<UseReducer />} />
+        <Route path="hooks/use-debug-value" element={<UseDebugValue />} />
+        <Route path="hooks/use-deferred-value" element={<UseDeferredValue />} />
       </Routes>
     </div>
   );

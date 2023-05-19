@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from "react";
+import React, { FC, useLayoutEffect, useState } from "react";
 
 /**
  * TASK: Observe the component's flickering on a click. Fix it with the useLayoutEffect hook.
@@ -7,7 +7,7 @@ import React, { FC, useEffect, useState } from "react";
 export const UseLayoutEffect: FC = () => {
   const [value, setValue] = useState(0);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (value === 0) {
       setValue(10 + Math.random() * 1000);
     }

@@ -1,14 +1,14 @@
-import React, { FC, useRef, useState } from "react";
+import React, { createContext, FC, useContext, useRef, useState } from "react";
 
-interface DefaultValues {
-  options: Array<string>;
-  selectedOption: string;
-}
-
-const defaultValues: DefaultValues = {
+const defaultValues = {
   options: ["one", "two", "three", "four"],
   selectedOption: "one",
 };
+
+const ThemeContext = createContext<{
+  options: Array<string>;
+  selectedOption: string;
+}>(defaultValues);
 
 /**
  * TASK: Rewrite the code with the usage of context provider and useContext hook
@@ -19,8 +19,8 @@ export const UseContext: FC = () => {
   const [values, setOptions] = useState(defaultValues);
 
   return (
-    <>
-      <BadgeComponent values={values} />
+    <ThemeContext.Provider value={values}>
+      <BadgeComponent />
       <SimpleForm
         handleAddValue={(value: string) =>
           setOptions({ ...values, options: [...values.options, value] })
@@ -28,17 +28,16 @@ export const UseContext: FC = () => {
         handleSetSelectedOption={(value: string) =>
           setOptions({ ...values, selectedOption: value })
         }
-        values={values}
       />
-    </>
+
+    </ThemeContext.Provider>
   );
 };
 
 const SimpleForm: FC<{
   handleAddValue: (key: string) => void;
   handleSetSelectedOption: (key: string) => void;
-  values: DefaultValues;
-}> = ({ handleAddValue, handleSetSelectedOption, values }) => {
+}> = ({ handleAddValue, handleSetSelectedOption }) => {
   const inputRef = useRef<HTMLInputElement>(null);
 
   const handleClick = (): void => {
@@ -61,25 +60,22 @@ const SimpleForm: FC<{
         </button>
       </div>
 
-      <SelectComponent
-        handleSetSelectedOption={handleSetSelectedOption}
-        values={values}
-      />
+      <SelectComponent handleSetSelectedOption={handleSetSelectedOption} />
     </>
   );
 };
 
 const SelectComponent: FC<{
   handleSetSelectedOption: (key: string) => void;
-  values: DefaultValues;
-}> = ({ handleSetSelectedOption, values }) => {
+}> = ({ handleSetSelectedOption }) => {
+  const { options } = useContext(ThemeContext);
+
   return (
     <select
       className="form-select"
-      defaultValue={values.options[0]}
       onChange={(e) => handleSetSelectedOption(e.target.value)}
     >
-      {values.options.map((option, key) => (
+      {options.map((option, key) => (
         <option key={key} value={option}>
           {option}
         </option>
@@ -88,14 +84,16 @@ const SelectComponent: FC<{
   );
 };
 
-const BadgeComponent: FC<{ values: DefaultValues }> = ({ values }) => {
+const BadgeComponent: FC = () => {
+  const { options, selectedOption } = useContext(ThemeContext);
+
   return (
     <div className="pt-3">
-      {values.options.map((value, key) => (
+      {options.map((value, key) => (
         <span
           key={key}
           className={`badge bg-${
-            value === values.selectedOption ? "primary" : "secondary"
+            value === selectedOption ? "primary" : "secondary"
           } me-1`}
         >
           {value}

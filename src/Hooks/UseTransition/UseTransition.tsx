@@ -1,4 +1,4 @@
-import React, { FC, useState } from "react";
+import React, { FC, useMemo, useState, useTransition } from "react";
 
 const numbers = [...Array(10000).keys()];
 
@@ -12,21 +12,30 @@ const numbers = [...Array(10000).keys()];
 
 export const UseTransition: FC = () => {
   const [value, setValue] = useState("");
+  const [isPending, startTransition] = useTransition();
 
-  const handleChange = (e: any) => {
-    setValue(e.target.value);
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    startTransition(() => {
+      setValue(e.target.value);
+    });
   };
 
-  const filteredList = numbers.filter((i) => i.toString().startsWith(value));
+  const filteredList = useMemo(
+    () => numbers.filter((i) => i.toString().startsWith(value)),
+    [value]
+  );
 
-  const renderList = () => (
-    <ul className="list-group">
-      {filteredList.map((number, index) => (
-        <li key={index} className="list-group-item">
-          {number}
-        </li>
-      ))}
-    </ul>
+  const renderList = useMemo(
+    () => (
+      <ul className="list-group">
+        {filteredList.map((number, index) => (
+          <li key={index} className="list-group-item">
+            {number}
+          </li>
+        ))}
+      </ul>
+    ),
+    [filteredList]
   );
 
   return (
@@ -38,7 +47,7 @@ export const UseTransition: FC = () => {
         onChange={handleChange}
         value={value}
       />
-      <div className="py-3">{renderList()}</div>
+      <div className="py-3">{isPending ? "Loading..." : renderList}</div>
     </>
   );
 };
