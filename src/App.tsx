@@ -8,18 +8,21 @@ import { FragmentComponent } from "./Components/BuiltIn/Fragment/FragmentCompone
 import { SuspenseComponent } from "./Components/BuiltIn/Suspense/SuspenseComponent";
 import { ProfilerComponent } from "./Components/BuiltIn/Profiler/ProfilerComponent";
 import { HigherOrderComponent } from "./Components/HOC/HigherOrderComponent";
-import { UseState } from "./Hooks/UseState/UseState";
-import { UseEffect } from "./Hooks/UseEffect/UseEffect";
+import { UseState } from "./Hooks/useState/UseState";
+import { UseEffect } from "./Hooks/useEffect/UseEffect";
 import { UseRef } from "./Hooks/useRef/UseRef";
-import { UseMemo } from "./Hooks/UseMemo/UseMemo";
-import { UseCallback } from "./Hooks/UseCallback/UseCallback";
-import { UseContext } from "./Hooks/UseContext/UseContext";
-import { UseLayoutEffect } from "./Hooks/UseLayoutEffect/UseLayoutEffect";
-import { UseTransition } from "./Hooks/UseTransition/UseTransition";
+import { UseMemo } from "./Hooks/useMemo/UseMemo";
+import { UseCallback } from "./Hooks/useCallback/UseCallback";
+import { UseContext } from "./Hooks/useContext/UseContext";
+import { UseLayoutEffect } from "./Hooks/useLayoutEffect/UseLayoutEffect";
+import { UseTransition } from "./Hooks/useTransition/UseTransition";
 import { UseId } from "./Hooks/useId/UseId";
 import { UseReducer } from "./Hooks/useReducer/UseReducer";
 import { UseDebugValue } from "./Hooks/useDebugValue/UseDebugValue";
 import { UseDeferredValue } from "./Hooks/useDeferredValue/UseDeferredValue";
+import { UseImperativeHandle } from "./Hooks/useImperativeHandle/UseImperativeHandle";
+import { UseInsertionEffect } from "./Hooks/useInsertionEffect/UseInsertionEffect";
+import { UseSyncExternalStore } from "./Hooks/useSyncExternalStore/UseSyncExternalStore";
 
 const ToC: FC = () => {
   return (
@@ -97,6 +100,15 @@ const ToC: FC = () => {
           <li>
             <Link to="hooks/use-deferred-value">useDeferredValue</Link>
           </li>
+          <li>
+            <Link to="hooks/use-imperative-handle">useImperativeHandle</Link>
+          </li>
+          <li>
+            <Link to="hooks/use-insertion-effect">useInsertionEffect</Link>
+          </li>
+          <li>
+            <Link to="hooks/use-sync-external-store">useSyncExternalStore</Link>
+          </li>
         </ul>
       </li>
     </ul>
@@ -146,6 +158,18 @@ function App() {
         <Route path="hooks/use-reducer" element={<UseReducer />} />
         <Route path="hooks/use-debug-value" element={<UseDebugValue />} />
         <Route path="hooks/use-deferred-value" element={<UseDeferredValue />} />
+        <Route
+          path="hooks/use-imperative-handle"
+          element={<UseImperativeHandle />}
+        />
+        <Route
+          path="hooks/use-insertion-effect"
+          element={<UseInsertionEffect />}
+        />
+        <Route
+          path="hooks/use-sync-external-store"
+          element={<UseSyncExternalStore />}
+        />
       </Routes>
     </div>
   );

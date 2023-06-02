@@ -9,6 +9,7 @@ export const UseDebugValue: FC = () => {
   const users = useFetch("https://jsonplaceholder.typicode.com/users");
 
   if (!users.response?.length) return null;
+
   return (
     <ul className="list-group">
       {users.response.map((user) => (

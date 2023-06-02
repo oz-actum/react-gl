@@ -1,4 +1,4 @@
-import React, { FC, useState, useTransition } from "react";
+import React, { FC, useDeferredValue, useState } from "react";
 
 const generateProducts = () => {
   const products = [];
@@ -21,16 +21,24 @@ const filterProducts = (filterTerm: string) => {
  * TASK 2: Change the code, so you will use useDeferredValue() Hook instead of useTransition() Hook.
  */
 
+/**
+ * ANSWER TO TASK 1:
+ *
+ * The difference is that useTransition() wraps the state updating code, whilst useDeferredValue() wraps a value that's affected by the state update.
+ * You don't need to (and shouldn't) use both together, since they achieve the same goal in the end.
+ * Instead, it makes sense to prefer useTransition(), if you have some state update that should be treated with a lower priority,
+ * and you have access to the state updating code. If you don't have that access, use useDeferredValue().
+ */
+
 export const UseDeferredValue: FC = () => {
-  const [isPending, startTransition] = useTransition();
   const [filterTerm, setFilterTerm] = useState("");
 
   const filteredProducts = filterProducts(filterTerm);
 
+  const deferredProducts = useDeferredValue(filteredProducts);
+
   const updateFilterHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    startTransition(() => {
-      setFilterTerm(e.target.value);
-    });
+    setFilterTerm(e.target.value);
   };
 
   return (
@@ -42,17 +50,13 @@ export const UseDeferredValue: FC = () => {
         onChange={updateFilterHandler}
       />
       <div className="py-3">
-        {isPending ? (
-          <p>Updating List...</p>
-        ) : (
-          <ul className="list-group">
-            {filteredProducts.map((product, index) => (
-              <li key={index} className="list-group-item">
-                {product}
-              </li>
-            ))}
-          </ul>
-        )}
+        <ul className="list-group">
+          {deferredProducts.map((product, index) => (
+            <li key={index} className="list-group-item">
+              {product}
+            </li>
+          ))}
+        </ul>
       </div>
     </>
   );
