@@ -1,4 +1,4 @@
-import React, { FC, useState } from "react";
+import React, { FC, useInsertionEffect, useState } from "react";
 import { changeColors, getStyleRule } from "./cssInJs";
 
 /**
@@ -7,6 +7,16 @@ import { changeColors, getStyleRule } from "./cssInJs";
 
 export const UseInsertionEffect: FC = () => {
   const [theme, setTheme] = useState<"light" | "dark">("dark");
+
+  useInsertionEffect(() => {
+    changeColors(theme);
+    const styleRule: HTMLStyleElement = getStyleRule();
+    document.head.appendChild(styleRule);
+
+    return () => {
+      styleRule && document.head.removeChild(styleRule);
+    };
+  }, [theme]);
 
   const handleThemeChange = () => {
     setTheme(theme === "light" ? "dark" : "light");

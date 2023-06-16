@@ -23,6 +23,9 @@ import { UseDeferredValue } from "./Hooks/useDeferredValue/UseDeferredValue";
 import { UseImperativeHandle } from "./Hooks/useImperativeHandle/UseImperativeHandle";
 import { UseInsertionEffect } from "./Hooks/useInsertionEffect/UseInsertionEffect";
 import { UseSyncExternalStore } from "./Hooks/useSyncExternalStore/UseSyncExternalStore";
+import { CreateCustomHook } from "./Hooks/createCustomHook/CreateCustomHook";
+import { LazyComponent } from "./API/lazy/LazyComponent";
+import { MemoComponent } from "./API/memo/MemoComponent";
 
 const ToC: FC = () => {
   return (
@@ -109,6 +112,22 @@ const ToC: FC = () => {
           <li>
             <Link to="hooks/use-sync-external-store">useSyncExternalStore</Link>
           </li>
+          <li>
+            <Link to="hooks/create-custom-hooks">
+              How to create custom Hooks
+            </Link>
+          </li>
+        </ul>
+      </li>
+      <li>
+        API
+        <ul>
+          <li>
+            <Link to="api/lazy">Lazy</Link>
+          </li>
+          <li>
+            <Link to="api/memo">Memo</Link>
+          </li>
         </ul>
       </li>
     </ul>
@@ -170,6 +189,12 @@ function App() {
           path="hooks/use-sync-external-store"
           element={<UseSyncExternalStore />}
         />
+        <Route
+          path="hooks/create-custom-hooks"
+          element={<CreateCustomHook />}
+        />
+        <Route path="api/lazy" element={<LazyComponent />} />
+        <Route path="api/memo" element={<MemoComponent />} />
       </Routes>
     </div>
   );
