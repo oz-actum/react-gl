@@ -1,7 +1,4 @@
-import React, { FC, ReactNode, useState } from "react";
-import TabOne from "./TabOne";
-import TabTwo from "./TabTwo";
-import TabThree from "./TabThree";
+import React, { FC, lazy, ReactNode, Suspense, useState } from "react";
 
 /**
  * TASK: Make the Tabs component to be lazy loaded with a loading fallback.
@@ -16,17 +13,21 @@ const artificialDelay = (promise: Promise<any>) =>
     setTimeout(resolve, 1000);
   }).then(() => promise);
 
+const LazyTabOne = lazy(() => artificialDelay(import("./TabOne")));
+const LazyTabTwo = lazy(() => artificialDelay(import("./TabTwo")));
+const LazyTabThree = lazy(() => artificialDelay(import("./TabThree")));
+
 export const LazyComponent: FC = () => {
   const [tab, setTab] = useState<Tab>("one");
 
   const renderTab = (): ReactNode => {
     switch (tab) {
       case "one":
-        return <TabOne />;
+        return <LazyTabOne />;
       case "two":
-        return <TabTwo />;
+        return <LazyTabTwo />;
       case "three":
-        return <TabThree />;
+        return <LazyTabThree />;
       default:
         return <div>No content</div>;
     }
@@ -61,7 +62,7 @@ export const LazyComponent: FC = () => {
         </li>
       </ul>
 
-      {renderTab()}
+      <Suspense fallback={<div>Loading...</div>}>{renderTab()}</Suspense>
     </div>
   );
 };

@@ -1,74 +1,62 @@
-import React, { FC, useEffect, useReducer, useRef } from "react";
+import React, { FC, useEffect, useRef, useState } from "react";
 
 /**
  * TASK: Move the stop watch logic from the reducer into a custom "useStopwatch" Hook.
  */
 
-interface IReducer {
-  isRunning?: boolean;
+interface UseStopwatchOutput {
   time: number;
+  start: () => void;
+  stop: () => void;
+  reset: () => void;
 }
 
-interface IAction {
-  type: "start" | "stop" | "reset" | "tick";
-}
-
-const initialState: IReducer = {
-  isRunning: false,
-  time: 0,
-};
-
-function reducer(state: IReducer, action: IAction) {
-  switch (action.type) {
-    case "start":
-      return { ...state, isRunning: true };
-    case "stop":
-      return { ...state, isRunning: false };
-    case "reset":
-      return { ...initialState };
-    case "tick":
-      return { ...state, time: state.time + 1 };
-    default:
-      return state;
-  }
-}
-
-export const CreateCustomHook: FC = () => {
-  const [state, dispatch] = useReducer(reducer, initialState);
+export function useStopwatch(): UseStopwatchOutput {
+  const [time, setTime] = useState<number>(0);
+  const [isRunning, setIsRunning] = useState<boolean>(false);
   const intervalRef = useRef<NodeJS.Timer | undefined>(undefined);
 
   useEffect(() => {
-    if (!state.isRunning) return;
+    if (!isRunning) return;
 
-    intervalRef.current = setInterval(() => dispatch({ type: "tick" }), 1000);
+    intervalRef.current = setInterval(() => setTime((time) => time + 1), 1000);
 
     return () => {
       clearInterval(intervalRef.current);
       intervalRef.current = undefined;
     };
-  }, [state.isRunning]);
+  }, [isRunning]);
+
+  const start = () => setIsRunning(true);
+  const stop = () => setIsRunning(false);
+  const reset = () => {
+    setIsRunning(false);
+    setTime(0);
+  };
+
+  return {
+    time,
+    start,
+    stop,
+    reset,
+  };
+}
+
+export const CreateCustomHook: FC = () => {
+  const { time, start, stop, reset } = useStopwatch();
 
   return (
     <>
-      <code>{state.time}s</code>
+      <code>{time}s</code>
       <br />
       <div className="btn-group">
-        <button
-          className="btn btn-secondary"
-          onClick={() => dispatch({ type: "start" })}
-        >
+        <button className="btn btn-secondary" onClick={start}>
           Start
         </button>
-        <button
-          className="btn btn-secondary"
-          onClick={() => dispatch({ type: "stop" })}
-        >
+        <button className="btn btn-secondary" onClick={stop}>
           Stop
         </button>
-        <button
-          className="btn btn-secondary"
-          onClick={() => dispatch({ type: "reset" })}
-        >
+        <button className="btn btn-secondary" onClick={reset}>
           Reset
         </button>
       </div>

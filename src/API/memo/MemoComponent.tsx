@@ -1,4 +1,4 @@
-import React, { FC, useState } from "react";
+import React, { FC, memo, useCallback, useState } from "react";
 import data from "./data";
 
 /**
@@ -8,9 +8,9 @@ import data from "./data";
 export const MemoComponent: FC = () => {
   const [rerender, setRerender] = useState<number>(0);
 
-  const handleOnClick = () => {
-    window.alert("Hello from alert!");
-  };
+  const handleOnClick = useCallback(() => {
+    window.alert("Hello from alert");
+  }, []);
 
   console.log("MemoComponent was re-rendered");
   return (
@@ -37,7 +37,7 @@ const HeroBanner: FC<{
   description: string;
   buttonLabel: string;
   handleClick: () => void;
-}> = ({ heading, description, buttonLabel, handleClick }) => {
+}> = memo(({ heading, description, buttonLabel, handleClick }) => {
   console.log("HeroBanner was re-rendered");
 
   return (
@@ -49,4 +49,4 @@ const HeroBanner: FC<{
       </button>
     </>
   );
-};
+});

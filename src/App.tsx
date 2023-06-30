@@ -26,6 +26,10 @@ import { UseSyncExternalStore } from "./Hooks/useSyncExternalStore/UseSyncExtern
 import { CreateCustomHook } from "./Hooks/createCustomHook/CreateCustomHook";
 import { LazyComponent } from "./API/lazy/LazyComponent";
 import { MemoComponent } from "./API/memo/MemoComponent";
+import { StartTransitionComponent } from "./API/startTransition/StartTransitionComponent";
+import { CreatePortalComponent } from "./API/createPortal/CreatePortalComponent";
+import { FlushSyncComponent } from "./API/flushSync/FlushSyncComponent";
+import { ControlledAndUncontrolledComponents } from "./Miscellaneous/ControlledAndUncontrolledComponents/ControlledAndUncontrolledComponents";
 
 const ToC: FC = () => {
   return (
@@ -128,6 +132,25 @@ const ToC: FC = () => {
           <li>
             <Link to="api/memo">Memo</Link>
           </li>
+          <li>
+            <Link to="api/start-transition">StartTransition</Link>
+          </li>
+          <li>
+            <Link to="api/flush-sync">FlushSync</Link>
+          </li>
+          <li>
+            <Link to="api/create-portal">CreatePortal</Link>
+          </li>
+        </ul>
+      </li>
+      <li>
+        Miscellaneous
+        <ul>
+          <li>
+            <Link to="miscellaneous/controlled-and-uncontrolled-componenets">
+              Controlled and Uncontrolled Components
+            </Link>
+          </li>
         </ul>
       </li>
     </ul>
@@ -195,6 +218,16 @@ function App() {
         />
         <Route path="api/lazy" element={<LazyComponent />} />
         <Route path="api/memo" element={<MemoComponent />} />
+        <Route
+          path="api/start-transition"
+          element={<StartTransitionComponent />}
+        />
+        <Route path="api/flush-sync" element={<FlushSyncComponent />} />
+        <Route path="api/create-portal" element={<CreatePortalComponent />} />
+        <Route
+          path="miscellaneous/controlled-and-uncontrolled-componenets"
+          element={<ControlledAndUncontrolledComponents />}
+        />
       </Routes>
     </div>
   );
