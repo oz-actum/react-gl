@@ -15,10 +15,14 @@ const labels = {
 export const SpecialReactProps: FC = () => {
   return (
     <>
-      <h1>{labels.heading}</h1>
-      <p>{labels.content}</p>
-      <div className="alert alert-secondary" contentEditable>
-        This is editable content with <code>HTML</code>{" "}
+      <h1 dangerouslySetInnerHTML={{ __html: labels.heading }} />
+      <p dangerouslySetInnerHTML={{ __html: labels.content }} />
+      <div
+        className="alert alert-secondary"
+        contentEditable
+        suppressContentEditableWarning
+      >
+        This is an editable content with <code>HTML</code>{" "}
         <strong>markup</strong>.
       </div>
     </>

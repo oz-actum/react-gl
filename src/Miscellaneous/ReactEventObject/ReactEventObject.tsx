@@ -13,6 +13,7 @@ export const ReactEventObject: FC = () => {
   };
 
   const paragraphOnClick = (e: SyntheticEvent) => {
+    e.stopPropagation();
     console.log(logEvent(e));
   };
 
@@ -21,10 +22,14 @@ export const ReactEventObject: FC = () => {
   };
 
   const anchorOnClick = (e: SyntheticEvent) => {
+    e.preventDefault();
+    window.open("https://www.actumdigital.com/", "_blank");
     console.log(logEvent(e));
   };
 
   const buttonOnClick = (e: SyntheticEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
     console.log(logEvent(e));
   };
 
