@@ -30,6 +30,9 @@ import { StartTransitionComponent } from "./API/startTransition/StartTransitionC
 import { CreatePortalComponent } from "./API/createPortal/CreatePortalComponent";
 import { FlushSyncComponent } from "./API/flushSync/FlushSyncComponent";
 import { ControlledAndUncontrolledComponents } from "./Miscellaneous/ControlledAndUncontrolledComponents/ControlledAndUncontrolledComponents";
+import { ReactEventObject } from "./Miscellaneous/ReactEventObject/ReactEventObject";
+import { SpecialReactProps } from "./Miscellaneous/SpecialReactProps/SpecialReactProps";
+import { BestPractices } from "./Miscellaneous/BestPractices/BestPractices";
 
 const ToC: FC = () => {
   return (
@@ -151,6 +154,19 @@ const ToC: FC = () => {
               Controlled and Uncontrolled Components
             </Link>
           </li>
+          <li>
+            <Link to="miscellaneous/react-event-object">
+              React Event Object (Synthetic Event)
+            </Link>
+          </li>
+          <li>
+            <Link to="miscellaneous/special-react-props">
+              Special React props
+            </Link>
+          </li>
+          <li>
+            <Link to="miscellaneous/best-practices">Best Practices</Link>
+          </li>
         </ul>
       </li>
     </ul>
@@ -227,6 +243,18 @@ function App() {
         <Route
           path="miscellaneous/controlled-and-uncontrolled-componenets"
           element={<ControlledAndUncontrolledComponents />}
+        />
+        <Route
+          path="miscellaneous/react-event-object"
+          element={<ReactEventObject />}
+        />
+        <Route
+          path="miscellaneous/special-react-props"
+          element={<SpecialReactProps />}
+        />
+        <Route
+          path="miscellaneous/best-practices"
+          element={<BestPractices />}
         />
       </Routes>
     </div>
