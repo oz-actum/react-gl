@@ -36,7 +36,7 @@ function reducer(state: IReducer, action: IAction) {
 
 export const UseReducer: FC = () => {
   const [state, dispatch] = useReducer(reducer , initialState);
-  const intervalRef = useRef<NodeJS.Timer | undefined>(undefined);
+  const intervalRef = useRef<NodeJS.Timeout | undefined>(undefined);
 
   useEffect(() => {
     if (!state.isRunning) return;

@@ -14,7 +14,7 @@ interface UseStopwatchOutput {
 export function useStopwatch(): UseStopwatchOutput {
   const [time, setTime] = useState<number>(0);
   const [isRunning, setIsRunning] = useState<boolean>(false);
-  const intervalRef = useRef<NodeJS.Timer | undefined>(undefined);
+  const intervalRef = useRef<NodeJS.Timeout | undefined>(undefined);
 
   useEffect(() => {
     if (!isRunning) return;
